@@ -1,0 +1,15 @@
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container" style="line-height:50px;">
+    	<a href="/admin/" class="col-sm-1">首页</a>
+    	<a href="/admin/blog" class="col-sm-1">信息</a>
+    	<a href="/admin/aboutus" class="col-sm-1">关于我们</a>
+    	<a href="/admin/contact" class="col-sm-1">联系</a>
+    	<a href="/admin/custom" class="col-sm-1">用户</a>
+    	<a href="/admin/msg" class="col-sm-1">信息</a>
+    	<a href="/admin/news" class="col-sm-1">新闻</a>
+    </div>
+</div>
+<script>
+    var str=window.location.pathname;
+    $("a[href='"+str+"']").css({"background":"#babdc2","border-radius":"4px"});
+</script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>banner</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<% include components/top.ejs %>
+		<div class="content" style="margin-top:70px;">
+			<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+			  新增
+			</button>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			       <form action="?" method="post"  class="form-horizontal">
+						<div  class="form-group">
+							 <label class="col-md-2 control-label">标题</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control"  name="title" placeholder="请输入标题" />
+							</div>
+						</div>
+						<div  class="form-group">
+							<label class="col-md-2 control-label" >描述</label>
+							<div class="col-md-6">
+								<textarea name="description" class="form-control" placeholder="请输入描述"></textarea>
+							</div>
+						</div>
+						<div  class="form-group">
+							<label class="col-md-2 control-label">链接</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="href" placeholder="请输入链接"/>
+							</div>
+						</div>
+						<div  class="form-group">
+							<div class="col-md-offset-2">
+								<input type="submit" class="btn btn-primary" value="添加">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div>
+					</form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<table class="table table-bordered" style="margin-top:20px;">
+				<tbody>
+					<th>
+						<td class="col-md-2">标题</td>
+						<td class="col-md-4">描述</td>
+						<td class="col-md-4">链接</td>
+						<td class="col-md-1">操作</td>
+					</th>
+					<% for(var i=0;i<banner.length;i++){ %>
+					<tr>
+						<td><%=banner[i].ID%></td>
+						<td><%=banner[i].title%></td>
+						<td><%=banner[i].description%></td>
+						<td><%=banner[i].href%></td>
+						<td><a href="?act=mod&id=<%=banner[i].ID%>">修改</a>
+						<a href="?act=del&id=<%=banner[i].ID%>" onclick="return confirm('确实删除吗?')">删除</a></td>
+					</tr>	
+					<% } %>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+	<% if(typeof mod_data!="undefined"){%>
+			<div style="position:fixed;left:0px;top:0px;z-index:2000;width:100%;height:100%;background-color: rgba(54,52,48,0.4);">
+				<div class="modal-content" style="position: fixed;left:40%;top:10%;z-index:1000;width:30%;padding:20px;">
+					<form action="?" method="post" class="form-horizontal">
+					<input type="hidden" name="mod_id" value="<%=mod_data.ID%>"/>
+						<div  class="form-group">
+							<label class="col-md-2 control-label">标题</label>
+							<div class="col-md-6">
+								<input type="text"  name="title" value="<%=mod_data.title%>"/>
+							</div>
+						</div>
+						<div  class="form-group">
+							<label class="col-md-2 control-label">描述</label>
+							<div class="col-md-6">
+								<textarea name="description"><%=mod_data.description%></textarea>
+							</div>
+						</div>
+						<div  class="form-group">
+							<label class="col-md-2 control-label">链接</label>
+							<div class="col-md-6">
+								<input type="text"  name="href" value="<%=mod_data.href%>"/>
+							</div>
+						</div>
+						<div  class="form-group">
+							<div class="col-md-offset-2">
+								<input type="submit" value="修改" class="btn btn-primary">
+								<a href="/admin/banner" class="btn btn-default">取消</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<% }%>
+
+</body>
+</html>	

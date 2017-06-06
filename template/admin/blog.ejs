@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>blog</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <% include components/top.ejs %>
+        <div class="content" style="margin-top:70px;">
+            <form action="?" method="post" class="form-horizontal">
+                <div  class="form-group">
+                     <label class="col-md-2 control-label">标题</label>
+                    <div class="col-md-6">
+                        <input type="text"   name="title" placeholder="请输入标题" />
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label">pic_src</label>
+                    <div class="col-md-6">
+                        <input type="text"   name="pic_src" />
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label">pic_big_src</label>
+                    <div class="col-md-6">
+                        <input type="text"  name="pic_big_src" />
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label">描述</label>
+                    <div class="col-md-6">
+                        <textarea name="summary" id="summary"></textarea>
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label">content</label>
+                    <div class="col-md-6">
+                        <input type="text"  name="content" id="content"/>
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label"> post_time</label>
+                    <div class="col-md-6">
+                        <input type="text"  name="post_time" id="post_time"/>
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label">author</label>
+                    <div class="col-md-6">
+                        <input type="text"  name="author" id="author"/>
+                    </div>
+                </div>
+                <div  class="form-group">
+                     <label class="col-md-2 control-label"> n_view</label>
+                    <div class="col-md-6">
+                        <input type="text"  name="n_view" id="n_view"/>
+                    </div>
+                </div>
+                <input type="button" id="add" value="添加">
+            </form>
+            <table class="table table-bordered" style="margin-top:20px;">
+                <tbody>
+                    <th>
+                        <td>ID</td>
+                        <td>title</td>
+                        <td>pic_src</td>
+                        <td>pic_big_src</td>
+                        <td>描述</td>
+                        <td>content</td>
+                        <td>post_time</td>
+                        <td>author</td>
+                        <td>n_view</td>
+                    </th>
+                    <% for(var i=0;i<banner.length;i++){ %>
+                    <tr>
+                        <td><%=banner[i].ID%></td>
+                        <td><%=banner[i].title%></td>
+                        <td><%=banner[i].pic_src%></td>
+                        <td><%=banner[i].pic_big_src%></td>
+                        <td><%=banner[i].summary%></td>
+                        <td><%=banner[i].content%></td>
+                        <td><%=banner[i].post_time%></td>
+                        <td><%=banner[i].author%></td>
+                         <td><%=banner[i].n_view%></td>
+                        <td><a href="?act=mod&id=<%=banner[i].ID%>">修改</a>
+                        <a href="?act=del&id=<%=banner[i].ID%>" onclick="return confirm('确实删除吗？')">删除</a></td>
+                    </tr>   
+                    <% } %>
+                </tbody>
+            </table>
+            <% if(typeof mod_data!="undefined"){%>
+            <div>
+                <form action="?" method="post">
+                <input type="hidden" name="mod_id" value="<%=mod_data.ID%>"/>
+                    标题：<input type="text"  name="title" value="<%=mod_data.title%>"/><br />
+                    pic_src：<input type="text"  name="pic_src" value="<%=mod_data.pic_src%>" /><br />
+                    pic_big_src：<input type="text"  name="pic_big_src" value="<%=mod_data.pic_big_src%>"/><br />
+                    描述：<textarea name="summary"><%= mod_data.summary%></textarea><br />
+                    content：<input type="text"  name="content" value="<%=mod_data.content%>"/><br />
+                    post_time：<input type="text"  name="post_time" value="<%=mod_data.post_time%>"/><br />
+                    author：<input type="text"  name="author" value="<%=mod_data.author%>"/><br />
+                    n_view：<input type="text"  name="n_view" value="<%=mod_data.n_view%>"/><br />
+                    <input type="submit" value="修改"><a href="/admin/blog">取消修改</a>
+                </form>
+            </div>
+            <% }%>
+        </div>
+    </div>
+</body>
+</html> 
